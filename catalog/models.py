@@ -9,9 +9,9 @@ class Product(models.Model):
     description_product = models.TextField(max_length=1000, verbose_name='описание')
     image_product = models.ImageField(upload_to= 'image_product/', verbose_name='изображение', **NULLEBLE)
     category_product = models.CharField(max_length=150, verbose_name='категория')
-    purchase_price_product = models.CharField(max_length=150, verbose_name='цена покупки')
-    date_creation_product = models.CharField(max_length=150, verbose_name='дата создания')
-    date_last_modification_product = models.CharField(max_length=150, verbose_name='дата последнего изменения')
+    purchase_price_product = models.IntegerField(verbose_name='цена покупки')
+    date_creation_product = models.DateField(auto_now_add=True, verbose_name='дата создания')
+    date_last_modification_product = models.DateField(auto_now=True, verbose_name='дата последнего изменения')
 
     def __str__(self):
         return f'{self.name_product}, {self.description_product}, {self.date_last_modification_product}'
