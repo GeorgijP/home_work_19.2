@@ -14,7 +14,7 @@ class Command(BaseCommand):
             {"name": "Малина",
              "description": "Красивая",
              "image": None,
-             "category": "Ягода",
+             "category": 3,
              "purchase_price": 600}
         ]
 
