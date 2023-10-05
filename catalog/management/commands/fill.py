@@ -6,16 +6,16 @@ from django.core.management import BaseCommand
 class Command(BaseCommand):
     def handle(self, *args, **options):
         category_list = [
-            {"name_category": "Овощи", "description_category": "Очень полезный продукт!!!"},
-            {"name_category": "Фрукты", "description_category": "Очень вкусный продукт!!!"},
-            {"name_category": "Ягода", "description_category": "Очень сладкий продукт!!!"}
+            {"name": "Овощи", "description": "Очень полезный продукт!!!"},
+            {"name": "Фрукты", "description": "Очень вкусный продукт!!!"},
+            {"name": "Ягода", "description": "Очень сладкий продукт!!!"}
         ]
         product_list = [
-            {"name_product": "Малина",
-             "description_product": "Красивая",
-             "image_product": None,
-             "category_product": "Ягода",
-             "purchase_price_product": 600}
+            {"name": "Малина",
+             "description": "Красивая",
+             "image": None,
+             "category": "Ягода",
+             "purchase_price": 600}
         ]
 
         category_create = []
