@@ -1,33 +1,23 @@
-from catalog.models import Category, Product
+from django.conf import settings
 
-from django.core.management import BaseCommand
+from django.core.management import BaseCommand, call_command
+from django.db import ProgrammingError, IntegrityError
 
 
 class Command(BaseCommand):
-    def handle(self, *args, **options):
-        category_list = [
-            {"name": "Овощи", "description": "Очень полезный продукт!!!"},
-            {"name": "Фрукты", "description": "Очень вкусный продукт!!!"},
-            {"name": "Ягода", "description": "Очень сладкий продукт!!!"}
-        ]
-        product_list = [
-            {"name": "Малина",
-             "description": "Красивая",
-             "image": None,
-             "category": 3,
-             "purchase_price": 600}
-        ]
+    requires_migrations_checks = True
 
-        category_create = []
-        for category_item in category_list:
-            category_create.append(Category(**category_item))
+    def handle(self, *args, **options) -> None:
+        fixtures_path = settings.BASE_DIR.joinpath('/Users/mac/Desktop/home_work_19.2.3/data.json')
 
-        Category.objects.all().delete()
-        Category.objects.bulk_create(category_create)
-
-        product_create = []
-        for product_item in product_list:
-            product_create.append(Product(**product_item))
-
-        Product.objects.all().delete()
-        Product.objects.bulk_create(product_create)
+        try:
+            call_command('loaddata', fixtures_path)
+        except ProgrammingError:
+            pass
+        except IntegrityError as e:
+            self.stdout.write(f'Invalid fixtures: {e}', self.style.NOTICE)
+        else:
+            self.stdout.write(
+                'Command have been completed successfully',
+                self.style.SUCCESS
+            )
