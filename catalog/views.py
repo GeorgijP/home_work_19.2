@@ -1,18 +1,13 @@
-from django.shortcuts import render
+from django.views.generic import ListView
 
 from catalog.models import Category
 
 
-# Create your views here.
-
-def home(request):
-    category_list = Category.objects.all()
-
-    context = {
-        'object_list': category_list
-    }
-    return render(request, 'catalog/home.html', context)
+class CategoryListView(ListView):
+    model = Category
+    template_name = 'catalog/home.html'
 
 
-def contacts(request):
-    return render(request, 'catalog/contacts.html')
+class ContactsListView(ListView):
+    model = Category
+    template_name = 'catalog/contacts.html'
